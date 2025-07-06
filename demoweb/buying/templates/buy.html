@@ -1,0 +1,62 @@
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>details</title>
+</head>
+<body
+  style="
+    background-image: url('https://bpic.588ku.com/illus_water_img/23/08/23/4b7c1b0ef8c54bf9121558c26d6ea0ce.jpg!/fw/750/quality/99/unsharp/true/compress/true');
+    background-size: auto;
+  "
+>
+  {% for product in products %}
+  <div>
+    <h1 style="color: #f4a404">{{ product.name }}</h1>
+    <img
+      src="{{product.img_url}}"
+      alt="..."
+      style="
+        width: 300px;
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      "
+    />
+  </div>
+  <div style="background-color: rgba(138, 247, 247, 0.769); width: 500px">
+    <p>卖家：{{product.buyname}}</p>
+    <p>价格: {{ product.price }}元/kg</p>
+    <p>剩余: {{product.number}}kg</p>
+    <p>描述: {{ product.description }}</p>
+  </div>
+  <div>
+    <form action="/buying/buy/buyresult/" method="post">
+      {% csrf_token %}
+      <input type="text" name="购买数量" id="buynum" value="1" />
+      <input type="text" name="name" value="{{product.name}}" hidden />
+      <input type="text" name="buyname" value="{{product.buyname}}" hidden />
+      <input type="text" name="price" value="{{product.price}}" hidden />
+      <button
+        type="button"
+        onclick="addone()"
+        style="background-color: #05c7f8"
+      >
+        +1
+      </button>
+      <button
+        type="submit"
+        style="background-color: #05c7f8; display: block; margin-top: 10px"
+      >
+        购买
+      </button>
+      <script>
+        function addone() {
+          var input = document.getElementById("buynum");
+          input.value = parseInt(input.value || 0) + 1;
+        }
+      </script>
+    </form>
+  </div>
+  {% endfor %}
+</body>

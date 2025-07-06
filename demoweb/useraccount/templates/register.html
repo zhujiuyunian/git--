@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>登录</title>
+  </head>
+  <body>
+    <div
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 200px;
+        margin-bottom: 200px;
+        font-size: 20px;
+        height: 300px;
+        margin-left: 400px;
+        margin-right: 400px;
+        background-image: url('https://pic4.zhimg.com/v2-1df96a203a7295b0b590c7b536a88702_r.jpg?source=1940ef5c');
+        background-size: cover;
+      "
+    >
+      <form action="/useraccount/register/" method="post">
+        {% csrf_token %} {% if result %}
+        <p style="text-align: center">{{result}}</p>
+        {% endif %}
+        <p style="margin-right: 10px">
+          账户名<input type="text" name="username" style="margin-left: 10px" />
+        </p>
+        <p style="margin-right: 30px">
+          密码<input type="text" name="password" style="margin-left: 30px" />
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(2, auto)">
+          <a href="/useraccount/">返回 </a
+          ><button
+            type="submit"
+            name="action"
+            value="register"
+            style="width: 100px"
+          >
+            注册
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

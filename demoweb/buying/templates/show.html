@@ -1,0 +1,37 @@
+{% extends "base.html" %} {% block content %}
+<h1 id="tittle" style="text-align: center">
+  <em style="font: normal; color: #f31905">产品</em>
+</h1>
+<div class="row" style="display: grid;grid-template-columns: repeat(3,auto);margin-top: 20px;margin-bottom: 20px;">
+  {% for product in products %}
+  <div class="col" style="margin-top: 50px;margin-bottom: 50px;margin-left: 50px;margin-right: 50px;" >
+    <div class="card" style="width: 18rem;display: grid;grid-template-rows: repeat(3,auto);">
+      <img
+        src="{{product.img_url}}"
+        class="card-img-top"
+        alt="..."
+        style="width: 280px; height: 280px;margin-top: auto;margin-bottom: auto;margin-left: auto;margin: auto;"
+      />
+      <div
+        class="card-body" 
+      >
+        <h3 class="card-title">{{product.name}}</h3>
+        <p style="text-align: left;">{{product.buyname}}</p>
+        <form action="/buying/buy/" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="name" value="{{product.name}}" />
+          <input type="hidden" name="buyname" value="{{product.buyname}}" />
+          <button
+            type="submit"
+            style="color: #0f1010; background-color: #08d4ef;margin-left: 100px;"
+          >
+            购买
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<a href="#tittle">返回顶部</a>
+{% endblock %}

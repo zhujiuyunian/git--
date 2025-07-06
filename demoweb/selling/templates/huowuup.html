@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上货</title>
+</head>
+<body style="
+      background-image: url('https://pic4.zhimg.com/v2-1df96a203a7295b0b590c7b536a88702_r.jpg?source=1940ef5c');
+      background-size: cover;
+    ">
+    <h1 style="text-align: center; font: bold;font-size: 25px; color: #f90505;">请完善商品信息以准许上架</h1>
+    <div style="font-size: 30px;">
+        <form action="/selling/up/result/" method="post">
+            {% csrf_token %}
+            <p>商品名称：<input type="text" name="productname" ></p>
+            <p>商品价格/元：<input type="text" name="productprice" ></p>
+            <p>上架数量/kg: <input type="text" name="productnumber" ></p>
+            <p>商品图片url地址: <input type="text" name="url" style="width: 300px;height: 40px;" ></p>
+            <p>商品描述：<input type="text" name="description" style="height: 80px;width: 300px;"></p>
+            <input type="text" hidden name="button" value="{{name}}">
+            <button type="submit" style="background-color: rgb(0, 204, 255); font-size: large; margin-left: 30px;">提交</button>
+        </form>
+    </div>
+</body>
+</html>

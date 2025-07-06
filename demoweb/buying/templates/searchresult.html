@@ -1,0 +1,38 @@
+<body style="background-image: url('https://bpic.588ku.com/illus_water_img/23/08/23/4b7c1b0ef8c54bf9121558c26d6ea0ce.jpg!/fw/750/quality/99/unsharp/true/compress/true');  background-size: auto;">
+<h1 id="tittle" style="text-align: center">
+  <em style="font: normal; color: #f31905">产品</em>
+</h1>
+<div class="row" style="margin-top: 20px;margin-bottom: 20px;text-align: center;">
+  {% for product in products %}
+  <div class="col" style="margin-top: 50px;margin-bottom: 50px;margin-left: 600px;margin-right: 600px;;" >
+    <div class="card" style="width: 18rem; background-color: rgba(13, 216, 235, 0.406);">
+      <img
+        src="{{product.img_url}}"
+        class="card-img-top"
+        alt="..."
+        style="width: 280px; height: 280px;margin-top: auto;margin-bottom: auto;margin-left: auto;margin: auto;"
+      />
+      <div
+        class="card-body" style="text-align: center;display: flex;justify-content: center;align-items: center;"
+      >
+        <h5 class="card-title" style="display: block;">{{product.name}}</h5>
+        <form action="/buying/buy/" method="post" style="margin: 10px;">
+          {% csrf_token %}
+          <input type="hidden" name="name" value="{{product.name}}" />
+          <button
+            type="submit"
+            style="color: #0f1010; background-color: #08d4ef"
+          >
+            购买
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <p style="text-align: center; color: #f40909;font-size: 40px; font: bold; background-color: #32edda4e;">未查询到结果</p>
+  {% endfor %}
+</div>
+<a href="#tittle">返回顶部</a>
+</body>
+

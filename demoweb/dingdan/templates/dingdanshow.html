@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>历史订单</title>
+  </head>
+  <body
+    style="
+      background-image: url('https://pic4.zhimg.com/v2-1df96a203a7295b0b590c7b536a88702_r.jpg?source=1940ef5c');
+      background-size: cover;
+    "
+  >
+    <h1 style="text-align: center; color: #f60505; font-size: 40px">
+      历史订单
+    </h1>
+    <div>
+      <h2 style="color: #f67905">购买历史</h2>
+      {% for b in buy %}
+      {% if b %}
+      <div style="display: grid; grid-template-columns: repeat(5,auto);background-color: rgb(255, 252, 240,0.5);margin-top: 20px; ">
+        <p style="font-size: large;">购买时间: {{b.paytime}}</p>
+        <p style="font-size: large;">购买物品: {{b.productname}}</p>
+        <p style="font-size: large;">购买物品数量: {{b.productnumber}} kg</p>
+        <p style="font-size: large;">物品价格: {{b.productprice}} 元/kg</p>
+        <p style="font-size: large;">支付金额: {{b.paymoney}}元</p>
+        <p style="font-size: large;">卖家: {{b.seller}}</p>
+    </div>
+     {% endif %}
+     {% endfor %}
+    </div>
+    <div>
+      <h2 style="color: #f67905">售出历史</h2>
+      {% for s in sell %}
+      {% if s %}
+      <div style="display: grid; grid-template-columns: repeat(5,auto);background-color: rgb(255, 252, 240,0.5);margin-top: 20px; ">
+        <p style="font-size: large;">售出时间: {{s.paytime}}</p>
+        <p style="font-size: large;">售出物品: {{s.productname}}</p>
+        <p style="font-size: large;">售出物品数量: {{s.productnumber}} kg</p>
+        <p style="font-size: large;">物品价格: {{s.productprice}} 元/kg</p>
+        <p style="font-size: large;">收益: {{s.paymoney}}元</p>
+        <p style="font-size: large;">买家: {{s.buyer}}</p>
+    </div>
+    {% endif %}
+     {% endfor %}
+    </div>
+  </body>
+</html>

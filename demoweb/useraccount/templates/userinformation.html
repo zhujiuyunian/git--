@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>个人信息</title>
+  </head>
+  <body
+    style="
+      background-image: url('https://pic4.zhimg.com/v2-1df96a203a7295b0b590c7b536a88702_r.jpg?source=1940ef5c');
+      background-size: cover;
+    "
+  >
+    <div>
+      <h1 style="text-align: center">
+        <em style="font: normal; color: #fa0000; text-align: center"
+          >个人信息</em
+        >
+      </h1>
+      {% for inf in result %}
+      <form action="/useraccount/userinformation/reset/" method="post">
+        {% csrf_token %}
+        <p style="margin-right: 20px">
+          昵称：{{inf.appname}}
+          <input type="text" name="chaxun" value="{{inf.username}}" hidden />
+          <input type="text" style="margin-left: 20px" name="name" /><button
+            type="submit"
+            name="button"
+            value="resetname"
+            style="background-color: rgb(4, 202, 252)"
+          >
+            更改昵称
+          </button>
+        </p>
+        <p style="margin-right: 20px">
+          剩余金额：{{inf.money}} 元
+          <button
+            style="background-color: rgb(3, 245, 221); margin-left: 20px"
+            name="button"
+            value="chongzhi"
+            type="submit"
+          >
+            充值
+          </button>
+        </p>
+        </p>
+      </form>
+
+      {% endfor %}
+    </div>
+    <div>
+      <form action="/useraccount/userinformation/reset/" method="post">
+        {% csrf_token %}
+        <button
+          style="background-color: rgb(3, 245, 221)"
+          name="button"
+          value="quit"
+          type="submit"
+        >
+          退出登录
+        </button>
+      </form>
+    </div>
+  </body>
+</html>
