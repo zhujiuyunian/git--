@@ -29,14 +29,14 @@ def upresult(request):
     else:
         buyname = account.appname
     if name1 :
-        if not Sellproduct.objects.filter(name=name1,appname=buyname):
+        if not Sellproduct.objects.filter(name=name1,appname=buyname,username=request.session['username']):
             if number:
                 if price:
                     if not number:
                         number = 0.0
                     if not price:
                         price = 0.0
-                    products=Products(name=name1,price=float(price),number=float(number),img_url=img_url,description=description,buyname=buyname)
+                    products=Products(name=name1,price=float(price),number=float(number),img_url=img_url,description=description,buyname=buyname,username=request.session['username'])
                     sellproduct=Sellproduct(name=name1,price=float(price),number=float(number),img_url=img_url,description=description,appname=buyname,username=request.session['username'])
                     products.save()
                     sellproduct.save()
@@ -44,8 +44,8 @@ def upresult(request):
                 return HttpResponse('请补全商品价格')
             return HttpResponse('请补全商品上架数量')          
         else:
-            products=Products.objects.filter(name=name1).first()
-            sellproduct=Sellproduct.objects.filter(name=name1).first()
+            products=Products.objects.filter(name=name1,username=request.session.get('username')).first()
+            sellproduct=Sellproduct.objects.filter(name=name1,username=request.session.get('username')).first()
             if not number:
                 number = 0.0
             if not price:
@@ -66,6 +66,8 @@ def upresult(request):
                     products.price = price
                     products.description = description
                     products.img_url = img_url
+                    products.appname = buyname
+                    products.username = request.session['username']
                     products.save()
             if sellproduct:
                 if sellproduct.number:
@@ -73,6 +75,8 @@ def upresult(request):
                     sellproduct.price = price 
                     sellproduct.description = description
                     sellproduct.img_url = img_url
+                    sellproduct.appname = buyname
+                    sellproduct.username = request.session['username']
                     sellproduct.save()
             return redirect('/selling/up/result/upresult/')  
     else:
@@ -88,8 +92,8 @@ def downresult(request):
     if number:
         if chaxunname and chaxunname.appname :
             buyname=chaxunname.appname
-            product = Products.objects.filter(name=product_name,buyname=buyname).first()
-            sellproduct = Sellproduct.objects.filter(name=product_name,appname=buyname).first()
+            product = Products.objects.filter(name=product_name,buyname=buyname,username=request.session.get('username')).first()
+            sellproduct = Sellproduct.objects.filter(name=product_name,appname=buyname,username=request.session.get('username')).first()
             if product and sellproduct:
                 if product.number and sellproduct.number:
                     if float(number) < sellproduct.number:
