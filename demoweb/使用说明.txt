@@ -1,26 +1,13 @@
-使用命令行 django-admin startproject demoweb. 创建框架（最后加.意味着在原有文件中组建框架,不用新生成文件夹）
-
-
+使用命令行 django-admin startproject webcreate. 创建框架（最后加.意味着在原有文件中组建框架,不用新生成文件夹）
 进入项目文件夹并使用命令行命令 python manage.py runserver 运行框架
-
-
-进入项目文件夹并使用命令行命令 python manage.py startapp buying 创建功能模块文件夹
-
-
-一般在功能模块文件里的views.py编写一些视图函数，编写完功能模块功能后需添加urls.py子项，并编写以下函数：
+进入项目文件夹并使用命令行命令 python manage.py startapp products 创建功能模块文件夹
+一般在功能模块文件里的views.py编写一些视图函数，编写完功能模块功能后需添加urls.py子项，并编写以下函数：'''
 from django.urls import path
 from . import views
 urlpatterns=[
-    path('',views.show)
-]  
-以实现功能正常调用,最后在总文件夹目录下（当前为buying）的urls.py添加网址路径，格式为 
-path('products/',include('products.urls'))
-
-
-在功能模块文件夹中的models可以添加模型，主要添加类，如可以添加一个有着商品名，价格，描述，存货量，商品图片的类，通过总文件夹里的settings添加products里apps.py文件里的配置名称，再通过命令行输入python manage.py makemigrations来让djanggo生成迁移文件，后续通过命令行python manage.py migrate 实现应用迁移，更新数据结构,以后每次创建新模型都应该创建一个迁移文件，然后进行迁移
-
-
+    path('',views.index)
+]  '''以实现功能正常调用,最后在总文件夹目录下（当前为webcraete）的urls.py添加网址路径，格式为 path('products/',include('products.urls'))
+在功能模块文件夹中的models可以添加模型，主要添加类，如可以添加一个有着商品名，价格，描述，存货量，商品图片的类，通过总文件夹里的settings添加products里apps里的配置名称，再通过命令行输入python manage.py makemigrations来让djanggo生成迁移文件，后续通过命令行python manage.py migrate 实现应用迁移，更新数据结构,以后每次创建新模型都应该创建一个迁移文件，然后进行迁移
 使用命令行输入命令 python manage.py creatsuperuser 创建管理员账户，之后输入管理员名称，邮箱，密码完成创建，输入密码时不显示,通过admin进入管理员面板
-
-
-在模块文件夹里的admin里进行配置，注册模型到admin界面,在admin网页里可以添加管理模型
+在模块文件夹里的admin里进行配置，注册模型到admin界面
+在admin网页里可以添加管理模型
